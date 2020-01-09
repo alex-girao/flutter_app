@@ -18,10 +18,29 @@ class HomePage extends StatelessWidget {
       // margin: EdgeInsets.only(left: 10, top: 10),
       color: Colors.white,
       child: Center(
-        child: _img()
+        child: _button()
       ),
     );
   }
+
+  _button() {
+    return RaisedButton(
+      color: Colors.blue,
+      child: Text(
+        "Ok",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 30,
+        ),
+      ),
+      onPressed: () => _onClickOk()
+    );
+  }
+
+  void _onClickOk() {
+    print("Clicou");
+  }
+
 
   _img() {
     return Image.asset(
