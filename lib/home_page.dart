@@ -17,20 +17,48 @@ class HomePage extends StatelessWidget {
     return Container(
       // margin: EdgeInsets.only(left: 10, top: 10),
       color: Colors.white,
-      child: Center(
-        child: _button()
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _text(),
+          _img(),
+          _buttons()
+        ],
       ),
     );
   }
 
-  _button() {
+  _buttons() {
+    return Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _button("ListView"),
+                _button("Page 2"),
+                _button("page 3")
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                _button("Saback"),
+                _button("Dialog"),
+                _button("Toast")
+              ],
+            )
+          ],
+        );
+  }
+
+  _button(String text) {
     return RaisedButton(
       color: Colors.blue,
       child: Text(
-        "Ok",
+        text,
         style: TextStyle(
           color: Colors.white,
-          fontSize: 30,
+          fontSize: 20,
         ),
       ),
       onPressed: () => _onClickOk()
@@ -44,7 +72,7 @@ class HomePage extends StatelessWidget {
 
   _img() {
     return Image.asset(
-      "assets/images/dog3.png",
+      "assets/images/dog1.png",
       fit: BoxFit.cover,
     );
   }
