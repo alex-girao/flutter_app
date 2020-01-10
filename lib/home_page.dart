@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/hello_page1.dart';
+import 'package:flutter_app/pages/hello_page2.dart';
+import 'package:flutter_app/pages/hello_page3.dart';
+import 'package:flutter_app/pages/hello_page4.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -8,32 +12,27 @@ class HomePage extends StatelessWidget {
         title: Text("Hello Flutter"),
         centerTitle: true,
       ),
-      body: _body(),
+      body: _body(context),
     );
   }
 
-  _body() {
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.yellow,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _text(),
-            _pageView(),
-            _buttons(),
-            _text(),
-            _pageView(),
-            _buttons()
-          ],
-        ),
+  _body(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          _text(),
+          _pageView(),
+          _buttons(context),
+        ],
       ),
     );
   }
 
   Container _pageView() {
     return Container(
-      margin: EdgeInsets.only(top:20, bottom: 20),
+      margin: EdgeInsets.only(top: 20, bottom: 20),
       height: 300,
       child: PageView(
         children: <Widget>[
@@ -47,47 +46,57 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _buttons() {
+  _buttons(BuildContext context) {
     return Column(
       children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _button("ListView"),
-            _button("Page 2"),
-            _button("page 3")
+            _button(context, "ListView",
+                () => _onClickNavigator(context, HelloPage1())),
+            _button(context, "Page 2",
+                () => _onClickNavigator(context, HelloPage2())),
+            _button(context, "page 3",
+                () => _onClickNavigator(context, HelloPage3())),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _button("Saback"),
-            _button("Dialog"),
-            _button("Toast")
+            _button(context, "Saback", _onClickSnack),
+            _button(context, "Dialog", _onClickDialog),
+            _button(context, "Toast", _onClickToast)
           ],
         )
       ],
     );
   }
 
-  _button(String text) {
+  void _onClickNavigator(BuildContext context, Widget page) async {
+    String s = await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return page;
+    }));
+    print(">>> $s");
+  }
+
+  _onClickSnack() {}
+
+  _onClickDialog() {}
+
+  _onClickToast() {}
+
+  _button(BuildContext context, String text, Function onPressed) {
     return RaisedButton(
-      color: Colors.blue,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 20,
+        color: Colors.blue,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
         ),
-      ),
-      onPressed: () => _onClickOk()
-    );
+        onPressed: onPressed);
   }
-
-  void _onClickOk() {
-    print("Clicou");
-  }
-
 
   _img(String img) {
     return Container(
