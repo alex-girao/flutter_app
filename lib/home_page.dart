@@ -3,6 +3,7 @@ import 'package:flutter_app/pages/hello_page1.dart';
 import 'package:flutter_app/pages/hello_page2.dart';
 import 'package:flutter_app/pages/hello_page3.dart';
 import 'package:flutter_app/pages/hello_page4.dart';
+import 'package:flutter_app/utils/nav.dart';
 import 'package:flutter_app/widgets/blue_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -71,13 +72,6 @@ class HomePage extends StatelessWidget {
         )
       ],
     );
-  }
-
-  Future push(BuildContext context, Widget page) {
-      return Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) {
-          return page;
-      }));
   }
 
   void _onClickNavigator(BuildContext context, Widget page) async {
