@@ -38,9 +38,13 @@ class HelloListView extends StatelessWidget {
             //primeiro a imagem
             _img(dog.foto),
             //depois o nome
-            Text(
-              dog.nome,
-              style: TextStyle(fontSize: 26, color: Colors.white),
+            Container(
+              alignment: Alignment.bottomRight,
+              //alignment: Alignment(1,1),
+              child: Text(
+                dog.nome,
+                style: TextStyle(fontSize: 26, color: Colors.white),
+              ),
             ),
           ],
         );
