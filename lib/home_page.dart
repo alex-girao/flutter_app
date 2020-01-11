@@ -3,6 +3,7 @@ import 'package:flutter_app/pages/hello_page1.dart';
 import 'package:flutter_app/pages/hello_page2.dart';
 import 'package:flutter_app/pages/hello_page3.dart';
 import 'package:flutter_app/pages/hello_page4.dart';
+import 'package:flutter_app/widgets/blue_button.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -52,30 +53,35 @@ class HomePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _button(context, "ListView",
-                () => _onClickNavigator(context, HelloPage1())),
-            _button(context, "Page 2",
-                () => _onClickNavigator(context, HelloPage2())),
-            _button(context, "page 3",
-                () => _onClickNavigator(context, HelloPage3())),
+            BlueButton(
+                "ListView", onPressed: () => _onClickNavigator(context, HelloPage1())),
+            BlueButton(
+                "Page 2", onPressed: () => _onClickNavigator(context, HelloPage2())),
+            BlueButton(
+                "page 3", onPressed: () => _onClickNavigator(context, HelloPage3())),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            _button(context, "Saback", _onClickSnack),
-            _button(context, "Dialog", _onClickDialog),
-            _button(context, "Toast", _onClickToast)
+            BlueButton("Saback", onPressed: _onClickSnack),
+            BlueButton("Dialog", onPressed: _onClickDialog),
+            BlueButton("Toast", onPressed: _onClickToast)
           ],
         )
       ],
     );
   }
 
+  Future push(BuildContext context, Widget page) {
+      return Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) {
+          return page;
+      }));
+  }
+
   void _onClickNavigator(BuildContext context, Widget page) async {
-    String s = await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return page;
-    }));
+    String s = await push(context, page);
     print(">>> $s");
   }
 
@@ -84,19 +90,6 @@ class HomePage extends StatelessWidget {
   _onClickDialog() {}
 
   _onClickToast() {}
-
-  _button(BuildContext context, String text, Function onPressed) {
-    return RaisedButton(
-        color: Colors.blue,
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
-        ),
-        onPressed: onPressed);
-  }
 
   _img(String img) {
     return Container(
