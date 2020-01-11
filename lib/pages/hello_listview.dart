@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Dog{
+class Dog {
   String nome;
   String foto;
 
@@ -38,12 +38,20 @@ class HelloListView extends StatelessWidget {
             //primeiro a imagem
             _img(dog.foto),
             //depois o nome
-            Container(
-              alignment: Alignment.bottomRight,
+            Align(
+              alignment: Alignment.topLeft,
               //alignment: Alignment(1,1),
-              child: Text(
-                dog.nome,
-                style: TextStyle(fontSize: 26, color: Colors.white),
+              child: Container(
+                margin: EdgeInsets.all(12),
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.black45,
+                  borderRadius: BorderRadius.circular(16)
+                ),
+                child: Text(
+                  dog.nome,
+                  style: TextStyle(fontSize: 26, color: Colors.white),
+                ),
               ),
             ),
           ],
