@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 BlueButton("Snack", onPressed: () => _onClickSnack(context)),
-                BlueButton("Dialog", onPressed: _onClickDialog),
+                BlueButton("Dialog", onPressed: () => _onClickDialog(context)),
                 BlueButton("Toast", onPressed: _onClickToast)
               ],
             )
@@ -99,7 +99,36 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  _onClickDialog() {}
+  _onClickDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        //quando tocar fora do dialog ele não fecha
+        barrierDismissible: false,
+        builder: (context) {
+          // WillPopScope utilizado no Android para impedir q o dialog seja fechado
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: AlertDialog(
+              title: Text("Irado!"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Cancelar"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                FlatButton(
+                  child: Text("OK"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    print("OK!!!!");
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
 
   _onClickToast() {}
 
