@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/drawer_list.dart';
 import 'package:flutter_app/pages/hello_page2.dart';
 import 'package:flutter_app/pages/hello_page3.dart';
 import 'package:flutter_app/pages/hello_listview.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
       ),
       body: _body(context),
+      drawer: DrawerList(),
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
