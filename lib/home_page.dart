@@ -12,34 +12,53 @@ import 'package:fluttertoast/fluttertoast.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Hello Flutter"),
-        centerTitle: true,
-      ),
-      body: _body(context),
-      drawer: DrawerList(),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              _onClickFab();
-            },
-          ),
-          /* Caso seja necessario mais de um
-          SizedBox(
-            width: 8,
-          ),
-          FloatingActionButton(
-            child: Icon(Icons.favorite),
-            onPressed: () {
-              _onClickFab();
-            },
-          ),
-          */
-        ],
+    // DefaultTabController utilizado quando precisamos de abas
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Hello Flutter"),
+          centerTitle: true,
+          bottom: TabBar(tabs: <Widget>[
+            Tab(text: "Tab 1",),
+            Tab(text: "Tab 2",),
+            Tab(text: "Tab 3",),
+          ],),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            _body(context),
+            Container(
+              color: Colors.yellow,
+            ),
+            Container(
+              color: Colors.green,
+            )
+          ],
+        ),
+        drawer: DrawerList(),
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                _onClickFab();
+              },
+            ),
+            /* Caso seja necessario mais de um
+            SizedBox(
+              width: 8,
+            ),
+            FloatingActionButton(
+              child: Icon(Icons.favorite),
+              onPressed: () {
+                _onClickFab();
+              },
+            ),
+            */
+          ],
+        ),
       ),
     );
   }
