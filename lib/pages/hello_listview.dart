@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/dog_page.dart';
+import 'package:flutter_app/utils/nav.dart';
 
 class Dog {
   String nome;
@@ -76,31 +78,36 @@ class _HelloListViewState extends State<HelloListView> {
     }
   }
 
-  Stack _itemView(List<Dog> dogs, int index) {
+  _itemView(List<Dog> dogs, int index) {
     Dog dog = dogs[index];
-    //return _img(dog.foto);
-    return Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        //primeiro a imagem
-        _img(dog.foto),
-        //depois o nome
-        Align(
-          alignment: Alignment.topLeft,
-          //alignment: Alignment(1,1),
-          child: Container(
-            margin: EdgeInsets.all(12),
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: Colors.black45,
-                borderRadius: BorderRadius.circular(16)),
-            child: Text(
-              dog.nome,
-              style: TextStyle(fontSize: 26, color: Colors.white),
+    // GestureDetector para fazer a navegacao, pois n possui onPressed
+    return GestureDetector(
+      onTap: () {
+        push(context, DogPage(dog));
+      },
+      child: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          //primeiro a imagem
+          _img(dog.foto),
+          //depois o nome
+          Align(
+            alignment: Alignment.topLeft,
+            //alignment: Alignment(1,1),
+            child: Container(
+              margin: EdgeInsets.all(12),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: Colors.black45,
+                  borderRadius: BorderRadius.circular(16)),
+              child: Text(
+                dog.nome,
+                style: TextStyle(fontSize: 26, color: Colors.white),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
